@@ -45,6 +45,6 @@ resource "aws_instance" "bia-dev" {
   }
   vpc_security_group_ids = [aws_security_group.bia_dev.id]
   root_block_device {
-    volume_size = 10
+    volume_size = 12
   }
 }
