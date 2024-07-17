@@ -16,11 +16,14 @@ provider "aws" {
 }
 
 resource "aws_instance" "bia-dev" {
-  ami = "ami-02f3f602d23f1659d"
+  ami           = "ami-02f3f602d23f1659d"
   instance_type = "t3.micro"
   tags = {
-    ambiente = "bia-dev"
-    Name = "bia-local"
+    ambiente = "dev"
+    Name     = "bia-dev"
   }
-  
+  vpc_security_group_ids = ["sg-06b74a0cede272517"]
+  root_block_device {
+    volume_size = 10
+  }
 }
