@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.16"
+      version = "~> 5.53"
     }
   }
 
@@ -43,10 +43,13 @@ resource "aws_instance" "bia_dev" {
     ambiente = "dev"
     Name     = var.instance_name
   }
+  subnet_id = local.subnet_zona_a
+  associate_public_ip_address = true
   vpc_security_group_ids = [aws_security_group.bia_dev.id]
   root_block_device {
     volume_size = 12
   }
   iam_instance_profile = aws_iam_role.role_acesso_ssm.name
   user_data = "${file("userdata_biadev.sh")}"
+  key_name = "terraform"
 }
