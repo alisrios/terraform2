@@ -1,7 +1,3 @@
-# __generated__ by Terraform
-# Please review these resources and move them into your main configuration files.
-
-# __generated__ by Terraform
 resource "aws_db_instance" "bia" {
   allocated_storage                     = 20
   allow_major_version_upgrade           = null
