@@ -36,3 +36,8 @@ output "rds_secret_name" {
   description = "Nome do meu segredo"
   value = data.aws_secretsmanager_secret.bia_db.name
 }  
+
+output "aws_acm_certificate" {
+  description = "ARN fo meu certificado"
+  value = aws_acm_certificate.imported_cert.arn
+}  
