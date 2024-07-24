@@ -32,3 +32,7 @@ output "bia_repo_url" {
   value = aws_ecr_repository.bia.repository_url
 }
   
+output "rds_secret_name" {
+  description = "Nome do meu segredo"
+  value = data.aws_secretsmanager_secret.bia_db.name
+}  
