@@ -3,7 +3,6 @@ resource "aws_db_instance" "bia" {
   allow_major_version_upgrade           = null
   apply_immediately                     = null
   auto_minor_version_upgrade            = true
-  availability_zone                     = "us-east-1b"
   backup_retention_period               = 0
   backup_target                         = "region"
   backup_window                         = "09:03-09:33"
@@ -13,7 +12,6 @@ resource "aws_db_instance" "bia" {
   custom_iam_instance_profile           = null
   customer_owned_ip_enabled             = false
   db_name                               = null
-  db_subnet_group_name                  = "default-vpc-0e2a3064fc4b31049"
   dedicated_log_volume                  = false
   delete_automated_backups              = true
   deletion_protection                   = false
@@ -35,7 +33,7 @@ resource "aws_db_instance" "bia" {
   kms_key_id                            = "arn:aws:kms:us-east-1:590183808614:key/15a5bdca-9b4d-4480-8514-1659c494526f"
   license_model                         = "postgresql-license"
   maintenance_window                    = "thu:07:40-thu:08:10"
-  manage_master_user_password           = null
+  manage_master_user_password           = true
   master_user_secret_kms_key_id         = null
   max_allocated_storage                 = 1000
   monitoring_interval                   = 0
@@ -63,4 +61,15 @@ resource "aws_db_instance" "bia" {
   timezone                              = null
   username                              = "postgres"
   vpc_security_group_ids                = [aws_security_group.bia_db.id]
+  db_subnet_group_name = aws_db_subnet_group.bia.name
 }
+
+resource "aws_db_subnet_group" "bia" {
+  name = "bia-subnet-group"
+  subnet_ids = [local.subnet_zona_a,local.subnet_zona_b]
+  
+  tags = {
+    name = "bia-subnet-group"
+  }
+}
+  
